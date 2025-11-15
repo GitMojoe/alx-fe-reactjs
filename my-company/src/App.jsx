@@ -8,9 +8,7 @@ import Navbar from './components/Navbar';
 function App(){
 
     return(
-      <>
-
-        <Router>
+        <BrowserRouter>
           <Navbar />
           <Routes>
             <Route path='/' element={<Home />} />
@@ -18,8 +16,8 @@ function App(){
             <Route path='/About' element={<About />} />
             <Route path='/Services' element={<Services />} />
           </Routes>
-        </Router>
-      </>
+        </BrowserRouter>
+     
     )
 }
 
