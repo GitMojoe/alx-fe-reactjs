@@ -1,13 +1,16 @@
-import { useState} from 'react'
-import {userContext} from './UserContext.js'
+import ProfilePage from './ProfilePage.jsx'
+import { userContext } from './UserContext.js'
 
 function App() {
-  const [user, setUser] = useState('Mojoe')
+  const userData = {
+    name: 'John Doe',
+    email: 'john.doe@example.com'
+  };
 
   return (
     <>
-         <userContext.Provider value={user}>
-          <ProfilePage user={userData} />
+         <userContext.Provider value={userData}>
+          <ProfilePage />
         </userContext.Provider>
 
 
