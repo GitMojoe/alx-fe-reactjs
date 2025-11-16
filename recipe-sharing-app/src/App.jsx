@@ -1,11 +1,10 @@
-import RecipeList from './Component/RecipeList';
-import AddRecipeListForm from './Component/AddRecipeForm';
-
+import RecipeList from './Components/RecipeList';
+import AddRecipeForm from './Components/AddRecipeForm';
 function App(){
   return(
     <>
       <RecipeList />
-      <AddRecipeListForm />
+      <AddRecipeForm />
     </>
   )
 }
