@@ -1,7 +1,5 @@
-# TODO List for Setting Up React Router for Recipe Details Navigation
+# TODO for RecommendationsList Component
 
-- [x] Fix import in App.jsx from 'react-dom' to 'react-router-dom'
-- [x] Wrap App in BrowserRouter in main.jsx
-- [x] Define routes in App.jsx: root for RecipeList and AddRecipeForm, /recipe/:id for RecipeDetails
-- [x] Update RecipeList.jsx to use Link components for navigation to recipe details
-- [x] Update RecipeDetails.jsx to use useParams for recipeId
+- [x] Implement RecommendationsList.jsx: Create React component that uses recipe store to generate and display personalized recommendations based on favorites.
+- [x] Use useEffect to call generateRecommendations on component mount.
+- [x] Render recommendations with title, description, and link to recipe details.
