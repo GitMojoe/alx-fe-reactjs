@@ -1,7 +1,7 @@
 import React from 'react';
 import { useRecipeStore } from './recipeStore';
 
-const SearchBar = () => {
+export const SearchBar = () => {
   const setSearchTerm = useRecipeStore(state => state.setSearchTerm);
 
   return (
