@@ -1,20 +1,40 @@
-import {BrowserRouter, Router, Routes, Route } from 'react-router-dom';
+import React from 'react';
+import { Routes, Route } from 'react-router-dom';
 import AddRecipeForm from './components/AddRecipeForm';
 import RecipeList from './components/RecipeList';
-import RecipeDetails from './components/RecipeDetails';
-import './App.css'
+import './App.css';
+import SearchBar from './components/SearchBar';
+import FavoritesList from './components/FavoritesList';
+import RecommendationsList from './components/RecommendationsList';
+import RecipeDetailsWrapper from './components/RecipeDetailsWrapper';
+
+
 function App() {
   return (
-      <div>
+    
+      <div style={{ padding: '20px' }}>
         <h1>Recipe Sharing App</h1>
+
         <Routes>
           {/* Home Page */}
           <Route
             path="/"
             element={
               <>
+                {/* Search Input */}
+                <SearchBar />
+
+                {/* Add Recipe */}
                 <AddRecipeForm />
+
+                {/* Recipe List */}
                 <RecipeList />
+
+                {/* Favorites & Recommendations */}
+                <div style={{ marginTop: '30px' }}>
+                  <FavoritesList />
+                  <RecommendationsList />
+                </div>
               </>
             }
           />
@@ -26,15 +46,8 @@ function App() {
           />
         </Routes>
       </div>
+   
   );
 }
-
-// Wrapper component to get the recipeId from URL and pass to RecipeDetails
-import { useParams } from 'react-router-dom';
-const RecipeDetailsWrapper = () => {
-  const { id } = useParams();
-  const recipeId = parseInt(id, 10); // Convert id to number if IDs are numbers
-  return <RecipeDetails recipeId={recipeId} />;
-};
 
 export default App;

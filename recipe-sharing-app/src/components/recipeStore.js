@@ -1,41 +1,61 @@
-import {create} from 'zustand'
+import {create} from 'zustand';
 
 const useRecipeStore = create(set => ({
+  // Recipes
   recipes: [],
-  searchTerm: '',          // search input from user
-  filteredRecipes: [],     // filtered results
 
-  // Add a new recipe
+  // Favorites
+  favorites: [],
+  addFavorite: (recipeId) =>
+    set(state => ({
+      favorites: state.favorites.includes(recipeId)
+        ? state.favorites
+        : [...state.favorites, recipeId]
+    })),
+  removeFavorite: (recipeId) =>
+    set(state => ({
+      favorites: state.favorites.filter(id => id !== recipeId)
+    })),
+
+  // Recommendations
+  recommendations: [],
+  generateRecommendations: () =>
+    set(state => {
+      // Simple mock: pick recipes from favorites randomly
+      const recommended = state.recipes.filter(
+        recipe => state.favorites.includes(recipe.id) && Math.random() > 0.5
+      );
+      return { recommendations: recommended };
+    }),
+
+  // Existing actions
   addRecipe: (newRecipe) =>
     set(state => ({ recipes: [...state.recipes, newRecipe] })),
-
-  // Update an existing recipe by ID
   updateRecipe: (id, updatedData) =>
     set(state => ({
       recipes: state.recipes.map(recipe =>
         recipe.id === id ? { ...recipe, ...updatedData } : recipe
       )
     })),
-
-  // Delete a recipe by ID
   deleteRecipe: (id) =>
     set(state => ({
-      recipes: state.recipes.filter(recipe => recipe.id !== id)
+      recipes: state.recipes.filter(recipe => recipe.id !== id),
+      favorites: state.favorites.filter(favId => favId !== id) // remove deleted from favorites
     })),
 
-  // Replace the whole recipe list
-  setRecipes: (recipes) => set({ recipes }),
-
-  // Set search term
+  // Search / Filter
+  searchTerm: '',
+  filteredRecipes: [],
   setSearchTerm: (term) => set({ searchTerm: term }),
-
-  // Compute filtered recipes based on searchTerm
   filterRecipes: () =>
     set(state => ({
       filteredRecipes: state.recipes.filter(recipe =>
         recipe.title.toLowerCase().includes(state.searchTerm.toLowerCase())
       )
-    }))
+    })),
+
+  // Replace all recipes
+  setRecipes: (recipes) => set({ recipes })
 }));
 
 export default useRecipeStore;
