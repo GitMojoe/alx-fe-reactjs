@@ -1,16 +1,58 @@
-# React + Vite
+# Recipe Sharing App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Description
+The Recipe Sharing App is a React-based web application that allows users to share, manage, and explore a wide variety of recipes. Users can add new recipes, view detailed recipe information, manage their favorite recipes, search by recipe titles, and receive recipe recommendations based on their favorites.
 
-Currently, two official plugins are available:
+## Key Features
+- Add, edit, and delete recipes easily via a user-friendly form.
+- Search for recipes by title using the search bar.
+- Mark recipes as favorites and manage the favorites list.
+- View recommended recipes based on your favorite choices.
+- View detailed information about each recipe on separate pages.
+- Responsive and modern UI built with React.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Installation and Setup
+1. Clone the repository:
+   ```
+   git clone <repository-url>
+   ```
+2. Navigate to the project directory:
+   ```
+   cd recipe-sharing-app
+   ```
+3. Install dependencies:
+   ```
+   npm install
+   ```
+4. Start the development server:
+   ```
+   npm run dev
+   ```
+5. Open your browser and go to `http://localhost:3000` (or the port provided) to use the app.
 
-## React Compiler
+## Usage
+- On the home page, use the search bar to find recipes by title.
+- Add new recipes by filling out the form provided.
+- Browse the list of all recipes below the form.
+- Click on any recipe to view detailed information.
+- Use the favorites section to save recipes you like.
+- Check out recommended recipes based on your favorites.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Technology Stack
+- React 19
+- Vite (Build tool)
+- Zustand (State management)
+- React Router Dom (Routing)
+- JavaScript (ES Modules)
 
-## Expanding the ESLint configuration
+## Project Structure
+- `src/App.jsx`: Main app component with routing setup.
+- `src/components/`: Contains individual components such as AddRecipeForm, RecipeList, RecipeDetailsWrapper, SearchBar, FavoritesList, RecommendationsList, and more.
+- `src/components/recipeStore.js`: Zustand store managing recipes, favorites, recommendations, and search/filter logic.
+- `package.json`: Lists dependencies, scripts and project metadata.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Contributing
+Contributions are welcome! Feel free to open issues or submit pull requests for bug fixes and feature enhancements.
+
+## License
+This project is currently private. Please contact the maintainer for more information.
