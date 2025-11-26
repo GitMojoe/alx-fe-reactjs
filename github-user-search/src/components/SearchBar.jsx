@@ -1,29 +1,70 @@
-// src/components/SearchBar.jsx
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { useGithubStore } from "../store/githubStore";
 
-export default function SearchBar() {
-  const [input, setInput] = useState("");
-  const navigate = useNavigate();
+const SearchBar = () => {
+  const [username, setUsername] = useState("");
+  const [location, setLocation] = useState("");
+  const [minRepos, setMinRepos] = useState("");
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    const username = input.trim();
-    if (!username) return;
-    // navigate to a route that will show the user details, e.g. /user/:username
-    navigate(`/user/${encodeURIComponent(username)}`);
-  }
+  const advancedSearch = useGithubStore((state) => state.advancedSearch);
+
+  const handleSearch = () => {
+    advancedSearch({ username, location, minRepos });
+  };
 
   return (
-    <form onSubmit={handleSubmit} style={{ display: "flex", gap: 8, alignItems: "center" }}>
-      <input
-        aria-label="GitHub username"
-        placeholder="Enter GitHub username..."
-        value={input}
-        onChange={(e) => setInput(e.target.value)}
-        style={{ padding: 8, flex: 1 }}
-      />
-      <button type="submit" style={{ padding: "8px 12px" }}>Search</button>
-    </form>
+    <div className="bg-white shadow-md rounded-lg p-6 max-w-2xl mx-auto mt-6">
+      <h2 className="text-xl font-semibold mb-4 text-gray-700 text-center">
+        GitHub Advanced Search
+      </h2>
+
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {/* Username field */}
+        <div>
+          <label className="block text-gray-600 text-sm mb-1">Username</label>
+          <input
+            type="text"
+            placeholder="e.g. torvalds"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            className="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
+
+        {/* Location field */}
+        <div>
+          <label className="block text-gray-600 text-sm mb-1">Location</label>
+          <input
+            type="text"
+            placeholder="e.g. Ghana"
+            value={location}
+            onChange={(e) => setLocation(e.target.value)}
+            className="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
+
+        {/* Minimum Repositories */}
+        <div>
+          <label className="block text-gray-600 text-sm mb-1">
+            Min Repositories
+          </label>
+          <input
+            type="number"
+            placeholder="e.g. 10"
+            value={minRepos}
+            onChange={(e) => setMinRepos(e.target.value)}
+            className="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
+      </div>
+
+      <button
+        onClick={handleSearch}
+        className="w-full mt-5 bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition">
+        Search
+      </button>
+    </div>
   );
-}
+};
+
+export default SearchBar;
