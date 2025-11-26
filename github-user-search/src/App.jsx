@@ -1,7 +1,7 @@
 // src/App.jsx
 import React from "react";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
-
+import SearchResults from "./components/SearchResults";
 import Home from "./components/Home";
 import Search from "./pages/SearchPage"; // we'll create this inline below (or you can create a file)
 import UserPage from "./pages/UserPage"; // same — we'll add below
@@ -22,6 +22,7 @@ import UserPage from "./pages/UserPage"; // same — we'll add below
             <Route path="/" element={<Home />} />
             <Route path="/search" element={<Search />} />
             <Route path="/user/:username" element={<UserPage />} />
+            <Route path="/results" element={<SearchResults />} />
           </Routes>
         </main>
       </div>

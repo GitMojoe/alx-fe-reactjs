@@ -1,22 +1,30 @@
-const BASE = "https://api.github.com";
-const API_KEY = import.meta.env.VITE_GITHUB_API_KEY; // optional
+const BASE_URL = "https://api.github.com/search/users";
 
-export async function fetchGithubUser(username) {
-  if (!username) throw new Error("Username is required");
+export async function searchGithubUsers({ username, location, minRepos }) {
+  try {
+    let query = "";
 
-  const headers = API_KEY
-    ? { Authorization: `Bearer ${API_KEY}` }
-    : {};
+    // Username
+    if (username) query += `${username} `;
 
-  const res = await fetch(`${BASE}/users/${encodeURIComponent(username)}`, {
-    headers,
-  });
+    // Location
+    if (location) query += `location:${location} `;
 
-  if (!res.ok) {
-    const error = new Error("GitHub user not found");
-    error.status = res.status;
-    throw error;
+    // Minimum repositories
+    if (minRepos) query += `repos:>=${minRepos}`;
+
+    // Prepare the final query
+    const url = `${BASE_URL}?q=${encodeURIComponent(query.trim())}`;
+
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error("Failed to fetch users");
+    }
+
+    const data = await response.json();
+    return data.items; // GitHub places user results inside "items"
+  } catch (error) {
+    console.error("GitHub Search Error:", error);
+    return [];
   }
-
-  return res.json();
 }
