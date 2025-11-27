@@ -1,4 +1,6 @@
-const BASE_URL = "https://api.github.com/search/users";
+const BASE = "https://api.github.com";
+const API_KEY = import.meta.env.VITE_GITHUB_API_KEY; // optional
+import axios from "axios";
 
 export async function searchGithubUsers({ username, location, minRepos }) {
   try {
@@ -28,3 +30,15 @@ export async function searchGithubUsers({ username, location, minRepos }) {
     return [];
   }
 }
+
+
+// Fetch a single GitHub user's data
+export const fetchUserData = async (username) => {
+  try {
+    const response = await axios.get(`https://api.github.com/users/${username}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching GitHub user:", error);
+    return null;
+  }
+};

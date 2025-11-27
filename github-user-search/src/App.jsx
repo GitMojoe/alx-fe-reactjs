@@ -5,6 +5,8 @@ import SearchResults from "./components/SearchResults";
 import Home from "./components/Home";
 import Search from "./pages/SearchPage"; // we'll create this inline below (or you can create a file)
 import UserPage from "./pages/UserPage"; // same — we'll add below
+import UserDetails from "./components/UserDetails";
+
 
  function App() {
   return (
@@ -23,6 +25,8 @@ import UserPage from "./pages/UserPage"; // same — we'll add below
             <Route path="/search" element={<Search />} />
             <Route path="/user/:username" element={<UserPage />} />
             <Route path="/results" element={<SearchResults />} />
+            <Route path="/user/:username" element={<UserDetails />} />
+
           </Routes>
         </main>
       </div>
