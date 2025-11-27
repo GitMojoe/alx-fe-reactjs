@@ -1,7 +1,7 @@
 // src/pages/UserPage.jsx
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { fetchGithubUser } from "../services/githubService";
+import { fetchUserData } from "../services/githubService";
 import UserCard from "../components/UserCard";
 
 export default function UserPage() {
@@ -16,7 +16,7 @@ export default function UserPage() {
     setError(null);
     setUser(null);
 
-    fetchGithubUser(username)
+    fetchUserData(username)
       .then((data) => setUser(data))
       .catch((err) => {
         setError(err.message || "Error fetching user");
