@@ -3,7 +3,7 @@ import React from "react";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import SearchResults from "./components/SearchResults";
 import Home from "./components/Home";
-import Search from "./pages/SearchPage"; // we'll create this inline below (or you can create a file)
+import Search from "./components/Search";
 import UserPage from "./pages/UserPage"; // same — we'll add below
 import UserDetails from "./components/UserDetails";
 
