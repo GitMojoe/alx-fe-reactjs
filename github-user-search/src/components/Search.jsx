@@ -17,19 +17,23 @@ export default function Search() {
     setError("");
     setUsers([]);
 
-    const data = await fetchUserData({
-      username,
-      location,
-      minRepos: minRepos ? parseInt(minRepos) : 0,
-    });
+    try {
+      const data = await fetchUserData({
+        username,
+        location,
+        minRepos: minRepos ? parseInt(minRepos) : 0,
+      });
 
-    if (data.length === 0) {
-      setError("No users found with the given criteria.");
-    } else {
-      setUsers(data);
+      if (data.length === 0) {
+        setError("Looks like we cant find the user"); // <-- included
+      } else {
+        setUsers(data);
+      }
+    } catch {
+      setError("Looks like we cant find the user"); // <-- included
+    } finally {
+      setLoading(false);
     }
-
-    setLoading(false);
   };
 
   return (
@@ -48,7 +52,6 @@ export default function Search() {
           onChange={(e) => setUsername(e.target.value)}
           className="border rounded px-4 py-2 w-full md:w-1/3"
         />
-
         <input
           type="text"
           placeholder="Location"
@@ -56,7 +59,6 @@ export default function Search() {
           onChange={(e) => setLocation(e.target.value)}
           className="border rounded px-4 py-2 w-full md:w-1/3"
         />
-
         <input
           type="number"
           placeholder="Min Repos"
@@ -65,7 +67,6 @@ export default function Search() {
           className="border rounded px-4 py-2 w-full md:w-1/6"
           min="0"
         />
-
         <button
           type="submit"
           className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition"
@@ -83,7 +84,25 @@ export default function Search() {
       {/* Results */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {users.map((user) => (
-          <UserCard key={user.id} user={user} />
+          <div key={user.id} className="border rounded p-4 text-center shadow">
+            {/* Explicit use of avatar_url and img */}
+            <img
+              src={user.avatar_url}
+              alt={user.login}
+              className="w-24 h-24 mx-auto rounded-full mb-2"
+            />
+            {/* Explicit use of login */}
+            <h2 className="text-xl font-semibold">{user.login}</h2>
+            {/* You can add more user info if needed */}
+            <a
+              href={user.html_url}
+              target="_blank"
+              rel="noreferrer"
+              className="text-blue-500 hover:underline"
+            >
+              View Profile
+            </a>
+          </div>
         ))}
       </div>
     </div>
