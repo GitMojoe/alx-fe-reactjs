@@ -1,5 +1,4 @@
 import UserProfile from "./component/UserProfile";
-
 function App(){
 
   return(
